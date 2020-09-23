@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCamera : MonoBehaviour
+public class ProjectileMovement : MonoBehaviour
 {
+    Rigidbody rb;
     void Start()
     {
-        Cursor.visible = false;
+        rb = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
