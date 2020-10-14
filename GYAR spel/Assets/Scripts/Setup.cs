@@ -8,6 +8,11 @@ public class Setup : NetworkBehaviour
     [SerializeField]
     Behaviour[] componentsToDisable;
     Camera sceneCamera;
+
+    [SerializeField]
+    string dontDrawLayerName = "DontDraw";
+    [SerializeField]
+    GameObject playerGraphics;
     void Start()
     {
         if(!isLocalPlayer)
@@ -24,6 +29,17 @@ public class Setup : NetworkBehaviour
             {
                 sceneCamera.gameObject.SetActive(false);
             }
+
+            SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
+        }
+    }
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
         }
     }
 

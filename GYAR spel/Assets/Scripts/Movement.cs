@@ -31,6 +31,10 @@ public class Movement : MonoBehaviour
     {
         Jumping();
         Rotation();
+        if (Input.GetKey(KeyCode.I))
+        {
+            rb.velocity = Vector3.forward * 1000 * Time.deltaTime;
+        }
     }
     private void FixedUpdate()
     {

@@ -20,15 +20,11 @@ public class Shooting : NetworkBehaviour
         {
             return;
         }
-        Shoot();
-    }
-    public void Shoot()
-    {
-        if(shotCooldown2 <= 0)
+        if (shotCooldown2 <= 0)
         {
-            if(Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
-                Instantiate(projectile, shotPoint.transform.position, shotPoint.transform.rotation);
+                CmdShoot();
                 shotCooldown2 = shotCooldown;
             }
         }
@@ -36,5 +32,11 @@ public class Shooting : NetworkBehaviour
         {
             shotCooldown2 -= Time.deltaTime;
         }
+    }
+    [Command]
+    public void CmdShoot()
+    {
+        GameObject a = Instantiate(projectile, shotPoint.transform.position, shotPoint.transform.rotation);
+        NetworkServer.Spawn(a);
     }
 }
