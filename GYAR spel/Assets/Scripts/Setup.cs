@@ -33,6 +33,13 @@ public class Setup : NetworkBehaviour
             SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
         }
     }
+    public override void OnStartClient()
+    {
+        string netId = GetComponent<NetworkIdentity>().netId.ToString();
+        Player player = GetComponent<Player>();
+
+        Manager.RegisterPlayer(netId, player);
+    }
     void SetLayerRecursively(GameObject obj, int newLayer)
     {
         obj.layer = newLayer;
